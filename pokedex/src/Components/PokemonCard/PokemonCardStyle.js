@@ -64,3 +64,16 @@ export const CapturarButton = styled.button`
   font-size: 1vw;
   border: none;
 `;
+
+export const IdCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vh;
+`;
+
+export const IdPokemom = styled.p`
+  font-size: 0.8vw;
+`;
+export const NomePokemom = styled.p`
+  font-size: 1.6vw;
+`;
