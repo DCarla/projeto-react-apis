@@ -63,6 +63,10 @@ export const CapturarButton = styled.button`
   border-radius: 0.5vw;
   font-size: 1vw;
   border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
 `;
 
 export const IdCard = styled.div`
@@ -76,4 +80,20 @@ export const IdPokemom = styled.p`
 `;
 export const NomePokemom = styled.p`
   font-size: 1.6vw;
+`;
+
+export const RemoveButton = styled.button`
+  position: absolute;
+  bottom: 3vh;
+  right: 3.6vw;
+  width: 4.2vw;
+  height: 3.2vh;
+  background: red;
+  border-radius: 0.5vw;
+  font-size: 1vw;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
 `;

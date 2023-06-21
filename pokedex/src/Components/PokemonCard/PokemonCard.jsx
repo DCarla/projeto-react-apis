@@ -8,6 +8,7 @@ import {
   IdCard,
   IdPokemom,
   NomePokemom,
+  RemoveButton,
 } from "./PokemonCardStyle";
 import pokebola from "../../assets/bola.svg";
 import estilo from "../../assets/Normal.svg";
@@ -15,9 +16,11 @@ import pok from "../../assets/Snorlax.svg";
 import { useNavigate } from "react-router-dom";
 import { SwitchTag } from "../SwitchTag/SwitchTag";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export function PokemonCard(props) {
   const [pokemonData, setPokemonData] = useState({});
+  const location = useLocation();
   const navigate = useNavigate();
 
   const goToDetalhePage = () => {
@@ -57,7 +60,16 @@ export function PokemonCard(props) {
         </InfoBox>
         <img src={pokebola} alt="Bola de fundo" />
       </CardBox>
-      <CapturarButton>Capturar</CapturarButton>
+
+      {location.pathname === "/" ? (
+        <CapturarButton onClick={() => props.addPokemon(props.pokemon)}>
+          Capturar!
+        </CapturarButton>
+      ) : (
+        <RemoveButton onClick={() => props.removerPokemon(props.pokemon)}>
+          Excluir
+        </RemoveButton>
+      )}
     </Container>
   );
 }

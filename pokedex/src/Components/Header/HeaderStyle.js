@@ -11,6 +11,7 @@ export const Container = styled.header`
   font-size: 1rem;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
+  position: relative;
 `;
 
 export const BotaoPokedex = styled.button`
@@ -48,4 +49,6 @@ export const BotaoHome = styled.button`
   gap: 5vw img {
     height: 2vh;
   }
+  position: absolute;
+  left: 50px;
 `;
