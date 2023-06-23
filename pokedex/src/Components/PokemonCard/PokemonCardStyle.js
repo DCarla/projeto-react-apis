@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const CardBox = styled.div`
   width: 29.9vw;
   height: 23vh;
-  background-color: #729f92;
+  background-color: ${(props) => props.cor};
   border-radius: 0.6vw;
   display: flex;
   justify-content: space-between;
@@ -63,6 +63,10 @@ export const CapturarButton = styled.button`
   border-radius: 0.5vw;
   font-size: 1vw;
   border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
 `;
 
 export const IdCard = styled.div`
@@ -76,4 +80,20 @@ export const IdPokemom = styled.p`
 `;
 export const NomePokemom = styled.p`
   font-size: 1.6vw;
+`;
+
+export const RemoveButton = styled.button`
+  position: absolute;
+  bottom: 2vh;
+  right: 2.6vw;
+  width: 4.2vw;
+  height: 3.2vh;
+  background: red;
+  border-radius: 0.5vw;
+  font-size: 1vw;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
 `;

@@ -1,32 +1,77 @@
-import { BotaoHome, BotaoPokedex, Container, Logo } from "./HeaderStyle";
+import {
+  BotaoHome,
+  BotaoPokedex,
+  BotaoPokedexdetalhes,
+  Container,
+  Logo,
+} from "./HeaderStyle";
 import logo from "../../assets/LogoPokemon.svg";
-import menor from "../../assets/iconeesquerdo.svg";
-import { goToHome, goToPokedexPage } from "../../Router/cordinator";
-import { useNavigate } from "react-router-dom";
 
-function Header() {
+import { goToHome, goToPokedexPage } from "../../Router/cordinator";
+import { useNavigate, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+function Header(props) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const pokemonExiste = props.pokedex.find(
+    (pok) => pok.name == location.pathname.split("/")[2]
+  );
+
+  console.log(pokemonExiste);
+  const [pokemonData, setPokemonData] = useState({});
+  const getPokemon = async () => {
+    const result = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${location.pathname.split("/")[2]}`
+    );
+    const data = await result.json();
+    console.log("aqui ", data);
+    setPokemonData(data);
+  };
+  useEffect(() => {
+    getPokemon();
+  }, [location.pathname]);
+
+  console.log("aqui ", pokemonData);
+
   return (
     <>
       <Container>
-        <BotaoHome
-          onClick={() => {
-            goToHome(navigate);
-          }}
-        >
-          <img src={menor} alt="Icone todos Pokémons" />
-          <u>Todos Pokémons</u>
-        </BotaoHome>
-
         <Logo src={logo} alt="Logo" />
-        <BotaoPokedex
-          onClick={() => {
-            goToPokedexPage(navigate);
-          }}
-        >
-          {" "}
-          Pokédex{" "}
-        </BotaoPokedex>
+        {location.pathname !== "/pokedex" &&
+        !location.pathname.includes("pokemondetails") ? (
+          <BotaoPokedex
+            onClick={() => {
+              goToPokedexPage(navigate);
+            }}
+          >
+            Pokédex
+          </BotaoPokedex>
+        ) : (
+          <BotaoHome
+            onClick={() => {
+              goToHome(navigate);
+            }}
+          >
+            Todos os Pokemon
+          </BotaoHome>
+        )}
+        {location.pathname.includes("pokemondetails") &&
+          (pokemonExiste ? (
+            <BotaoPokedexdetalhes
+              onClick={() => props.removerPokemon(pokemonData)}
+            >
+              Excluir da Pokedex
+            </BotaoPokedexdetalhes>
+          ) : (
+            <BotaoPokedexdetalhes
+              adicionar
+              onClick={() => props.addPokemon(pokemonData)}
+            >
+              Adicionar Pokedex
+            </BotaoPokedexdetalhes>
+          ))}
       </Container>
     </>
   );
