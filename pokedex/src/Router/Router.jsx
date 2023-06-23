@@ -4,8 +4,9 @@ import PokedexPage from "../Pages/PokedexPage/PokedexPage";
 import PokemonDetailPage from "../Pages/PokemonDetailPage/PokemonDetailPage";
 import Header from "../Components/Header/Header";
 import { useState } from "react";
+import { useDisclosure } from "@chakra-ui/react";
 
-export const Router = () => {
+export const Router = ({ onOpen }) => {
   const [pokedex, setPokedex] = useState([]);
 
   const addPokemon = (pokemonToAdd) => {
@@ -16,7 +17,8 @@ export const Router = () => {
     if (!jaNapokedex) {
       const newPokedex = [...pokedex, pokemonToAdd];
       setPokedex(newPokedex);
-      alert("Pokemon foi adicionado na Pokedex");
+      onOpen();
+      // alert("Pokemon foi adicionado na Pokedex");
     } else {
       alert("Pokemons já esta Pokedex");
     }
@@ -27,13 +29,19 @@ export const Router = () => {
       (ItemPokedex) => ItemPokedex.name !== pokemonToRemove.name
     );
     setPokedex(newPokedex);
+    alert(" \n Pokedex \n Pokemon foi removido da sua Pokedex");
   };
 
   console.log("pokedex", pokedex);
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header
+        pokedex={pokedex}
+        addPokemon={addPokemon}
+        removerPokemon={removerPokemon}
+      />
+
       <Routes>
         <Route
           path="/"

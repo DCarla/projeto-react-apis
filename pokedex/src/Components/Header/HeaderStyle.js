@@ -52,3 +52,18 @@ export const BotaoHome = styled.button`
   position: absolute;
   left: 50px;
 `;
+
+export const BotaoPokedexdetalhes = styled.button`
+  /* padding: 4px 10px; */
+
+  width: 10vw;
+  min-height: 5vh;
+  max-height: 10vh;
+  background: ${(props) => (props.adicionar ? "#33a4f5" : "#FF6262 ")};
+  border-radius: 1vh;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.5;
+  font-family: "Poppins", sans-serif;
+`;

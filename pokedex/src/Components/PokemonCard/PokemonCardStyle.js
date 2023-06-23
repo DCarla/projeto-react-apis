@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const CardBox = styled.div`
   width: 29.9vw;
   height: 23vh;
-  background-color: #729f92;
+  background-color: ${(props) => props.cor};
   border-radius: 0.6vw;
   display: flex;
   justify-content: space-between;
@@ -84,8 +84,8 @@ export const NomePokemom = styled.p`
 
 export const RemoveButton = styled.button`
   position: absolute;
-  bottom: 3vh;
-  right: 3.6vw;
+  bottom: 2vh;
+  right: 2.6vw;
   width: 4.2vw;
   height: 3.2vh;
   background: red;

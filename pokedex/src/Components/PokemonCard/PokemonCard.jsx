@@ -17,15 +17,14 @@ import { useNavigate } from "react-router-dom";
 import { SwitchTag } from "../SwitchTag/SwitchTag";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { goToDetailPage } from "../../Router/cordinator";
+import { switchCores } from "../SwitchTag/switchCores";
 
 export function PokemonCard(props) {
   const [pokemonData, setPokemonData] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
 
-  const goToDetalhePage = () => {
-    navigate("/detalhes");
-  };
   const getPokemon = async (Link) => {
     const result = await fetch(Link);
     const data = await result.json();
@@ -44,17 +43,21 @@ export function PokemonCard(props) {
         alt="Pokemon"
       />
 
-      <CardBox>
+      <CardBox
+        cor={switchCores(pokemonData.types && pokemonData.types[0].type.name)}
+      >
         <InfoBox>
           <IdCard>
             <IdPokemom>#{pokemonData.id} </IdPokemom>
             <NomePokemom>{props.pokemon.name}</NomePokemom>
             {pokemonData?.types?.map((item) => (
-              <SwitchTag type={item.type.name} />
+              <SwitchTag type={item.type.name} key={item.type.name} />
             ))}
           </IdCard>
 
-          <DetailButton onClick={goToDetalhePage}>
+          <DetailButton
+            onClick={() => goToDetailPage(navigate, pokemonData.name)}
+          >
             <u>Detalhes</u>
           </DetailButton>
         </InfoBox>
